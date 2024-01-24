@@ -1,0 +1,21 @@
+- # Fossil CO2-emission for jetfuel og NAFTA
+fossil_jetfuel_CO2 = 3.56 # kg CO2 per kg fossil jetfuel
+NAFTA_CO2 = 21.3 # kg CO2 per kg NAFTA
+
+# CO2-emission for produktion af SAF
+CO2_elec = 12 # g CO2 per kWh
+CO2_water = 8.2 # kg CO2 per m3 vand
+CO2_KOH = 0.25 # kg CO2 per kg KOH
+H2_CO2 = 0 # kg CO2 per Nm3 H2
+CO2_SAF = (CO2_elec * 1917000 + CO2_water * 426000 + CO2_KOH * 168000) / 1000 # kg CO2 per ton SAF
+
+# Energifordeling
+SAF_energy = 0.82 # 82% til SAF
+NAFTA_energy = 0.18 # 18% til NAFTA
+
+# CO2-reduktion
+CO2_reduction_SAF = (fossil_jetfuel_CO2 - H2_CO2 - CO2_SAF) / fossil_jetfuel_CO2 * 100
+CO2_reduction_NAFTA = (NAFTA_CO2 - CO2_SAF) / NAFTA_CO2 * 100
+
+print(f"CO2-reduktionen for produktionen af {75000:,} tons SAF er {CO2_reduction_SAF:.2f}% i forhold til fossil produktion.")
+print(f"CO2-reduktionen for produktionen af {17000:,} tons NAFTA er {CO2_reduction_NAFTA:.2f}% i forhold til fossil produktion.")
